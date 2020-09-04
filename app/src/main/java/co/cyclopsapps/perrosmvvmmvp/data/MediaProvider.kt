@@ -3,8 +3,12 @@ package co.cyclopsapps.perrosmvvmmvp.data
 /**
  * Created by Carlos Daniel Agudelo on 03/09/2020.
  */
-object MediaProvider {
-    fun getItems(): List<MediaItem> {
+interface MediaProvider {
+    fun getItems(): List<MediaItem>
+}
+
+object MediaProviderImpl : MediaProvider {
+    override fun getItems(): List<MediaItem> {
         Thread.sleep(2000)
         return (1..10).map {
             MediaItem(

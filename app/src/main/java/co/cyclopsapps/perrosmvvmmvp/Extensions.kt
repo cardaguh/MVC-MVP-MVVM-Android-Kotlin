@@ -10,8 +10,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.core.os.bundleOf
+import androidx.lifecycle.*
 import co.cyclopsapps.perrosmvvmmvp.ui.main.MediaAdapter
 import com.bumptech.glide.Glide
+import androidx.lifecycle.LifecycleOwner
 
 /**
  * Created by Carlos Daniel Agudelo on 03/09/2020.
@@ -40,4 +42,11 @@ inline fun <reified T : Activity> Context.startActivity(vararg  pairs: Pair<Stri
 
 fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(body: T.() -> Unit = { }): T =
+    ViewModelProvider(this).get<T>().apply(body)
+
+fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit ) {
+    liveData.observe(this, Observer(observer))
 }
