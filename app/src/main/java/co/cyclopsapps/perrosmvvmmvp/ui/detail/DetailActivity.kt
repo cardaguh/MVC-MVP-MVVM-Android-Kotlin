@@ -1,11 +1,14 @@
-package co.cyclopsapps.perrosmvvmmvp
+package co.cyclopsapps.perrosmvvmmvp.ui.detail
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import co.cyclopsapps.perrosmvvmmvp.data.MediaItem
+import co.cyclopsapps.perrosmvvmmvp.data.MediaProvider
 import co.cyclopsapps.perrosmvvmmvp.databinding.ActivityDetailBinding
+import co.cyclopsapps.perrosmvvmmvp.loadUrl
+import co.cyclopsapps.perrosmvvmmvp.setVisible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,18 +16,23 @@ import kotlinx.coroutines.withContext
 /**
  * Created by Carlos Daniel Agudelo on 03/09/2020.
  */
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailPresenter.View {
 
     companion object {
         const val EXTRA_ID = "DetailActivity:extraId"
     }
+
+    private val presenter = DetailPresenter(this, lifecycleScope)
+    private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycleScope.launch {
+        presenter.onCreate(intent.getIntExtra(EXTRA_ID, -1))
+
+        /*lifecycleScope.launch {
             val items = withContext(Dispatchers.IO) { MediaProvider.getItems() }
             val item = items.find { it.id == intent.getIntExtra(EXTRA_ID, -1) }
 
@@ -36,6 +44,19 @@ class DetailActivity : AppCompatActivity() {
                     MediaItem.Type.VIDEO -> View.VISIBLE
                 }
             }
-        }
+        }*/
     }
+
+    override fun setTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    override fun setImage(url: String) {
+        binding.detailThumb.loadUrl(url)
+    }
+
+    override fun setDetailIndicatorVisible(visible: Boolean) {
+        binding.detailVideoIndicator.setVisible(visible)
+    }
+
 }

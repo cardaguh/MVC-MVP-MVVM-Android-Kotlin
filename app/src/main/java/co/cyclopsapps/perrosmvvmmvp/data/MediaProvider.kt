@@ -1,4 +1,4 @@
-package co.cyclopsapps.perrosmvvmmvp
+package co.cyclopsapps.perrosmvvmmvp.data
 
 /**
  * Created by Carlos Daniel Agudelo on 03/09/2020.

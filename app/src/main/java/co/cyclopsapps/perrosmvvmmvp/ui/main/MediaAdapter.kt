@@ -1,9 +1,13 @@
-package co.cyclopsapps.perrosmvvmmvp
+package co.cyclopsapps.perrosmvvmmvp.ui.main
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.cyclopsapps.perrosmvvmmvp.R
+import co.cyclopsapps.perrosmvvmmvp.data.MediaItem
 import co.cyclopsapps.perrosmvvmmvp.databinding.ViewMediaItemBinding
+import co.cyclopsapps.perrosmvvmmvp.inflate
+import co.cyclopsapps.perrosmvvmmvp.loadUrl
 import kotlin.properties.Delegates
 
 /**
@@ -19,7 +23,10 @@ RecyclerView.Adapter<MediaAdapter.ViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = parent.inflate(R.layout.view_media_item, false)
-        return ViewHolder(v, listener)
+        return ViewHolder(
+            v,
+            listener
+        )
     }
 
     override fun getItemCount(): Int = items.size

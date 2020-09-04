@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.cyclopsapps.perrosmvvmmvp.DetailActivity"
+    tools:context="co.cyclopsapps.perrosmvvmmvp.ui.detail.DetailActivity"
     >
 
         <ImageView

@@ -3,7 +3,6 @@ package co.cyclopsapps.perrosmvvmmvp
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.service.media.MediaBrowserService
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.core.os.bundleOf
+import co.cyclopsapps.perrosmvvmmvp.ui.main.MediaAdapter
 import com.bumptech.glide.Glide
 
 /**
@@ -36,4 +36,8 @@ inline fun <reified T : Activity> Context.startActivity(vararg  pairs: Pair<Stri
     val intent = Intent(this, T::class.java)
     intent.putExtras(bundleOf(*pairs))
     startActivity(intent)
+}
+
+fun View.setVisible(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.GONE
 }
